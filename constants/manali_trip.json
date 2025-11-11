@@ -1,0 +1,339 @@
+{
+  "id": "trip_bali_001",
+  "title": "7-Day Bali Island Escape",
+  "country": "Indonesia",
+  "region": "Bali",
+  "rating": 4.8,
+  "reviewsCount": 912,
+  "heroImages": [
+    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1551629382-37a61f8b4c54?auto=format&fit=crop&w=1200&q=80"
+  ],
+  "coordinates": {
+    "lat": -8.4095,
+    "lng": 115.1889
+  },
+  "description": "A 7-day journey through Bali’s beaches, rice terraces, and temples — combining adventure, culture, and relaxation across Seminyak, Ubud, Nusa Dua, and Uluwatu.",
+  "duration": "7 Days",
+  "cost": "$800–1500 per person (approx.)",
+  "bestSeason": ["Apr – Oct"],
+  "style": ["Adventure", "Beach", "Culture"],
+  "tabs": ["Overview", "Map View", "Reviews"],
+  "itinerary": [
+    {
+      "day": 1,
+      "title": "Arrival in Seminyak & Sunset Beach Walk",
+      "activities": [
+        {
+          "name": "Seminyak Beach & Sunset",
+          "image": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80",
+          "description": "Arrive in Bali and relax by Seminyak Beach. Enjoy the evening sunset and explore the beach cafés.",
+          "duration": "2–3 hrs",
+          "price": "Free",
+          "tags": ["Sightseeing", "Beach"],
+          "coordinates": { "lat": -8.6908, "lng": 115.1686 },
+          "nearbyCafes": [
+            {
+              "name": "Sea Circus Café",
+              "coordinates": { "lat": -8.6959, "lng": 115.1605 }
+            },
+            {
+              "name": "Revolver Espresso",
+              "coordinates": { "lat": -8.6923, "lng": 115.1599 }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "The Legian Bali",
+              "rating": 4.9,
+              "priceCategory": "$$$",
+              "distance": "300 m",
+              "coordinates": { "lat": -8.6937, "lng": 115.1599 }
+            },
+            {
+              "name": "W Bali – Seminyak",
+              "rating": 4.8,
+              "priceCategory": "$$$$",
+              "distance": "450 m",
+              "coordinates": { "lat": -8.6891, "lng": 115.1608 }
+            }
+          ]
+        },
+        {
+          "name": "Seminyak Nightlife & Dinner",
+          "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
+          "description": "Visit local restaurants and enjoy live music at Seminyak Square.",
+          "duration": "2 hrs",
+          "price": "$20–40 per person",
+          "tags": ["Food", "Culture"],
+          "coordinates": { "lat": -8.6903, "lng": 115.1702 },
+          "nearbyCafes": [
+            {
+              "name": "La Favela Bali",
+              "coordinates": { "lat": -8.6941, "lng": 115.1598 }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "The Seminyak Beach Resort",
+              "rating": 4.7,
+              "priceCategory": "$$$",
+              "distance": "500 m",
+              "coordinates": { "lat": -8.6885, "lng": 115.1572 }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "title": "Ubud – Rice Terraces & Monkey Forest",
+      "activities": [
+        {
+          "name": "Tegalalang Rice Terraces",
+          "image": "https://images.unsplash.com/photo-1543248939-ff40856f65d4?auto=format&fit=crop&w=1200&q=80",
+          "description": "Explore the famous terraced fields of Tegalalang and enjoy Bali’s lush greenery.",
+          "duration": "2–3 hrs",
+          "price": "Entry ₹150 (approx.)",
+          "tags": ["Nature", "Sightseeing"],
+          "coordinates": { "lat": -8.5068, "lng": 115.2683 },
+          "nearbyCafes": [
+            {
+              "name": "Kismet Ubud",
+              "coordinates": { "lat": -8.5065, "lng": 115.2678 }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "Alaya Resort Ubud",
+              "rating": 4.8,
+              "priceCategory": "$$$",
+              "distance": "1 km",
+              "coordinates": { "lat": -8.5069, "lng": 115.265 }
+            }
+          ]
+        },
+        {
+          "name": "Sacred Monkey Forest Sanctuary",
+          "image": "https://images.unsplash.com/photo-1560371458-120d155a3c3b?auto=format&fit=crop&w=1200&q=80",
+          "description": "Meet playful macaques in a sacred forest and explore the 14th-century temple complex.",
+          "duration": "1.5 hrs",
+          "price": "$5 (approx.)",
+          "tags": ["Wildlife", "Temple"],
+          "coordinates": { "lat": -8.519, "lng": 115.259 },
+          "nearbyCafes": [
+            {
+              "name": "Clear Café Ubud",
+              "coordinates": { "lat": -8.5071, "lng": 115.2643 }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "Maya Ubud Resort & Spa",
+              "rating": 4.8,
+              "priceCategory": "$$$$",
+              "distance": "800 m",
+              "coordinates": { "lat": -8.5121, "lng": 115.2692 }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "title": "Mount Batur Sunrise Hike",
+      "activities": [
+        {
+          "name": "Mount Batur Trek",
+          "image": "https://images.unsplash.com/photo-1599914014606-175fb08c54d3?auto=format&fit=crop&w=1200&q=80",
+          "description": "Early morning hike up Mount Batur to witness one of Bali’s best sunrise views.",
+          "duration": "4–5 hrs",
+          "price": "$30 with guide",
+          "tags": ["Hiking", "Adventure"],
+          "coordinates": { "lat": -8.2767, "lng": 115.3755 },
+          "nearbyCafes": [
+            {
+              "name": "Kintamani Coffee",
+              "coordinates": { "lat": -8.3158, "lng": 115.3892 }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "The Ayu Kintamani Villa",
+              "rating": 4.6,
+              "priceCategory": "$$",
+              "distance": "2 km",
+              "coordinates": { "lat": -8.31, "lng": 115.379 }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 4,
+      "title": "Nusa Dua – Beach & Water Sports",
+      "activities": [
+        {
+          "name": "Water Sports at Nusa Dua",
+          "image": "https://images.unsplash.com/photo-1505739775417-14e7e3a37a08?auto=format&fit=crop&w=1200&q=80",
+          "description": "Jet skiing, snorkeling, and parasailing in the calm waters of Nusa Dua.",
+          "duration": "3–4 hrs",
+          "price": "$20–100 per person",
+          "tags": ["Adventure", "Water Sports"],
+          "coordinates": { "lat": -8.8071, "lng": 115.2313 },
+          "nearbyCafes": [
+            {
+              "name": "The Pirates Bay Bali",
+              "coordinates": { "lat": -8.7994, "lng": 115.2325 }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "The Laguna Resort & Spa",
+              "rating": 4.7,
+              "priceCategory": "$$$",
+              "distance": "400 m",
+              "coordinates": { "lat": -8.8042, "lng": 115.2266 }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 5,
+      "title": "Uluwatu Temple & Kecak Dance",
+      "activities": [
+        {
+          "name": "Uluwatu Temple Visit",
+          "image": "https://images.unsplash.com/photo-1543248939-ff40856f65d4?auto=format&fit=crop&w=1200&q=80",
+          "description": "Perched atop cliffs, Uluwatu Temple offers dramatic ocean views and a mesmerizing sunset.",
+          "duration": "2–3 hrs",
+          "price": "$5",
+          "tags": ["Culture", "Temple"],
+          "coordinates": { "lat": -8.8296, "lng": 115.086 },
+          "nearbyCafes": [
+            {
+              "name": "Single Fin Café",
+              "coordinates": { "lat": -8.822, "lng": 115.086 }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "Anantara Uluwatu Resort",
+              "rating": 4.8,
+              "priceCategory": "$$$",
+              "distance": "1 km",
+              "coordinates": { "lat": -8.828, "lng": 115.085 }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 6,
+      "title": "Nusa Penida Island Day Trip",
+      "activities": [
+        {
+          "name": "Kelingking Beach & Angel’s Billabong",
+          "image": "https://images.unsplash.com/photo-1565877856770-d27c2c8897e8?auto=format&fit=crop&w=1200&q=80",
+          "description": "Explore the breathtaking cliffs of Nusa Penida and relax at Crystal Bay.",
+          "duration": "Full day",
+          "price": "$50 (boat + guide)",
+          "tags": ["Beach", "Adventure"],
+          "coordinates": { "lat": -8.7333, "lng": 115.5333 },
+          "nearbyCafes": [
+            {
+              "name": "Penida Espresso",
+              "coordinates": { "lat": -8.7325, "lng": 115.5409 }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "Adiwana Warnakali Resort",
+              "rating": 4.7,
+              "priceCategory": "$$$",
+              "distance": "2 km",
+              "coordinates": { "lat": -8.734, "lng": 115.545 }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 7,
+      "title": "Shopping & Departure",
+      "activities": [
+        {
+          "name": "Seminyak Market & Departure",
+          "image": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=80",
+          "description": "Shop for souvenirs at Seminyak Market and depart with memories of Bali.",
+          "duration": "2–3 hrs",
+          "price": "Varies",
+          "tags": ["Shopping", "Culture"],
+          "coordinates": { "lat": -8.691, "lng": 115.1688 },
+          "nearbyCafes": [
+            {
+              "name": "Cafe Organic",
+              "coordinates": { "lat": -8.6905, "lng": 115.1679 }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "The Seminyak Beach Resort",
+              "rating": 4.7,
+              "priceCategory": "$$$",
+              "distance": "300 m",
+              "coordinates": { "lat": -8.6885, "lng": 115.1572 }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "howToReach": {
+    "nearestAirport": {
+      "name": "Ngurah Rai International Airport (Denpasar)",
+      "coordinates": { "lat": -8.7482, "lng": 115.1673 }
+    },
+    "description": "Fly directly into Ngurah Rai International Airport, Denpasar. The airport is about 30–45 mins from Seminyak and 1.5 hrs from Ubud. Taxis, private cars, and shared shuttles are readily available."
+  },
+  "nearbyHotels": [
+    {
+      "name": "The Legian Bali",
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+      "rating": 4.9,
+      "reviews": "1.2K",
+      "priceCategory": "200$–350$",
+      "coordinates": { "lat": -8.6908, "lng": 115.1686 }
+    },
+    {
+      "name": "Alaya Resort Ubud",
+      "image": "https://images.unsplash.com/photo-1606046604972-77cc76aee944?auto=format&fit=crop&w=1200&q=80",
+      "rating": 4.8,
+      "reviews": "980",
+      "priceCategory": "150$–300$",
+      "coordinates": { "lat": -8.5098, "lng": 115.2635 }
+    },
+    {
+      "name": "The Laguna Resort & Spa",
+      "image": "https://images.unsplash.com/photo-1540206351-d6465b3ac1ad?auto=format&fit=crop&w=1200&q=80",
+      "rating": 4.7,
+      "reviews": "890",
+      "priceCategory": "250$–400$",
+      "coordinates": { "lat": -8.8071, "lng": 115.2313 }
+    }
+  ],
+  "getInspired": [
+    {
+      "title": "Drone Tour of Bali’s Hidden Beaches",
+      "thumbnail": "https://images.unsplash.com/photo-1565877856770-d27c2c8897e8?auto=format&fit=crop&w=1200&q=80",
+      "videoUrl": "https://www.youtube.com/watch?v=bali_drone_01"
+    },
+    {
+      "title": "Rice Terraces & Temples in Ubud",
+      "thumbnail": "https://images.unsplash.com/photo-1543248939-ff40856f65d4?auto=format&fit=crop&w=1200&q=80",
+      "videoUrl": "https://www.youtube.com/watch?v=bali_culture_02"
+    }
+  ]
+}

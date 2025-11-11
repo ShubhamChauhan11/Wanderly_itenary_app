@@ -1,0 +1,374 @@
+{
+  "id": "trip_manali_001",
+  "title": "3-Day Manali Mixed Experience",
+  "country": "India",
+  "region": "Manali, Himachal Pradesh",
+  "rating": 4.7,
+  "reviewsCount": 418,
+  "heroImages": [
+    "https://t4.ftcdn.net/jpg/02/57/91/21/240_F_257912197_ySuBhefKYPQIZNa3xeGiObLpgYBnH9U5.jpg",
+    "https://t4.ftcdn.net/jpg/01/96/02/01/240_F_196020123_gO0XJKP1zWkKjtLQeIRV05dGcIIlIeAo.jpg",
+    "https://t4.ftcdn.net/jpg/01/71/19/19/240_F_171191968_h1yWvnUTa0MM6iIBnGdAHZeUAJEh9dBh.jpg"
+  ],
+  "coordinates": {
+    "lat": 32.2441,
+    "lng": 77.1882
+  },
+
+  "description": "A balanced 3-day itinerary around Manali combining nature, adventure, sightseeing and cozy cafés — perfect for a mixed experience.",
+  "duration": "3 Days",
+  "cost": "₹8,000–18,000 per person (approx.)",
+  "bestSeason": ["Mar – Jun", "Sep – Nov"],
+  "style": ["Adventure", "Sightseeing", "Relax"],
+  "tabs": ["Overview", "Map View", "Reviews"],
+  "itinerary": [
+    {
+      "day": 1,
+      "title": "Arrival, Mall Road & Hadimba Temple",
+      "activities": [
+        {
+          "name": "Mall Road (Stroll & Shops)",
+          "image": "https://t4.ftcdn.net/jpg/01/71/19/19/240_F_171191968_h1yWvnUTa0MM6iIBnGdAHZeUAJEh9dBh.jpg",
+          "description": "The bustling heart of Manali for shopping, street food and relaxed evening walks along the Beas river.",
+          "duration": "2–3 hrs",
+          "price": "Free",
+          "tags": ["Sightseeing", "Shopping"],
+          "coordinates": {
+            "lat": 32.2433,
+            "lng": 77.1892
+          },
+          "nearbyCafes": [
+            {
+              "name": "Johnson's Cafe",
+              "coordinates": {
+                "lat": 32.2435,
+                "lng": 77.1889
+              }
+            },
+            {
+              "name": "Cafe 1947 (Old Manali branch)",
+              "coordinates": {
+                "lat": 32.243,
+                "lng": 77.1885
+              }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "Snow Valley Resorts",
+              "rating": 4.4,
+              "priceCategory": "$$",
+              "distance": "200 m",
+              "coordinates": {
+                "lat": 32.2436,
+                "lng": 77.1896
+              }
+            },
+            {
+              "name": "Hotel Manali Heights",
+              "rating": 4.2,
+              "priceCategory": "$",
+              "distance": "350 m",
+              "coordinates": {
+                "lat": 32.2441,
+                "lng": 77.1882
+              }
+            }
+          ]
+        },
+        {
+          "name": "Hadimba (Hidimba Devi) Temple & Van Vihar",
+          "image": "https://t4.ftcdn.net/jpg/01/71/19/19/240_F_171191968_h1yWvnUTa0MM6iIBnGdAHZeUAJEh9dBh.jpg",
+          "description": "Ancient pagoda-style temple set inside a cedar forest — peaceful and photogenic.",
+          "duration": "1–1.5 hrs",
+          "price": "Free (donations)",
+          "tags": ["Temple", "Nature"],
+          "coordinates": {
+            "lat": 32.2386,
+            "lng": 77.1879
+          },
+          "nearbyCafes": [
+            {
+              "name": "The Lazy Dog",
+              "coordinates": {
+                "lat": 32.2389,
+                "lng": 77.1876
+              }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "Hotel Hadimba Heights",
+              "rating": 4.5,
+              "priceCategory": "$$$",
+              "distance": "450 m",
+              "coordinates": {
+                "lat": 32.2391,
+                "lng": 77.1872
+              }
+            },
+            {
+              "name": "Greenwoods Inn",
+              "rating": 4.3,
+              "priceCategory": "$$",
+              "distance": "600 m",
+              "coordinates": {
+                "lat": 32.2378,
+                "lng": 77.1889
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "title": "Solang Valley — Adventure & Paragliding",
+      "activities": [
+        {
+          "name": "Solang Valley (Paragliding, Zorbing, Ropeways)",
+          "image": "https://t4.ftcdn.net/jpg/01/96/02/01/240_F_196020123_gO0XJKP1zWkKjtLQeIRV05dGcIIlIeAo.jpg",
+          "description": "Adventure hub near Manali: paragliding in summer, skiing in winter and scenic ropeways.",
+          "duration": "3–5 hrs",
+          "price": "₹500–3,500 depending on activity",
+          "tags": ["Adventure", "Nature"],
+          "coordinates": {
+            "lat": 32.259,
+            "lng": 77.166
+          },
+          "nearbyCafes": [
+            {
+              "name": "Solang View Point Cafe",
+              "coordinates": {
+                "lat": 32.2586,
+                "lng": 77.1655
+              }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "Snow Peak Retreat (Solang)",
+              "rating": 4.3,
+              "priceCategory": "$$",
+              "distance": "1.2 km",
+              "coordinates": {
+                "lat": 32.2571,
+                "lng": 77.1639
+              }
+            },
+            {
+              "name": "Solang Valley Resort",
+              "rating": 4.0,
+              "priceCategory": "$$",
+              "distance": "900 m",
+              "coordinates": {
+                "lat": 32.2598,
+                "lng": 77.1675
+              }
+            }
+          ]
+        },
+        {
+          "name": "Jogini Falls (Short Trek from Vashisht)",
+          "image": "https://t4.ftcdn.net/jpg/01/96/02/01/240_F_196020123_gO0XJKP1zWkKjtLQeIRV05dGcIIlIeAo.jpg",
+          "description": "A pleasant short trek from Vashisht village to a scenic waterfall — great for couples and nature lovers.",
+          "duration": "1–2 hrs",
+          "price": "Free",
+          "tags": ["Hike", "Waterfall"],
+          "coordinates": {
+            "lat": 32.2356,
+            "lng": 77.1817
+          },
+          "nearbyCafes": [
+            {
+              "name": "Cafe D'Art (Vashisht)",
+              "coordinates": {
+                "lat": 32.235,
+                "lng": 77.181
+              }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "Vashisht Homestay",
+              "rating": 4.4,
+              "priceCategory": "$",
+              "distance": "400 m",
+              "coordinates": {
+                "lat": 32.2352,
+                "lng": 77.1814
+              }
+            },
+            {
+              "name": "Vashisht Springs Cottage",
+              "rating": 4.3,
+              "priceCategory": "$$",
+              "distance": "300 m",
+              "coordinates": {
+                "lat": 32.2358,
+                "lng": 77.1821
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "title": "Rohtang Pass (or alternate highland) & Old Manali",
+      "activities": [
+        {
+          "name": "Rohtang Pass (seasonal — check permits)",
+          "image": "https://t4.ftcdn.net/jpg/02/57/91/21/240_F_257912197_ySuBhefKYPQIZNa3xeGiObLpgYBnH9U5.jpg",
+          "description": "Snow-capped high mountain pass offering dramatic views and snow activities (open seasonally).",
+          "duration": "Half to full day (depending on travel)",
+          "price": "Permit fees / transport",
+          "tags": ["Adventure", "Snow", "Scenic"],
+          "coordinates": {
+            "lat": 32.3652,
+            "lng": 77.1601
+          },
+          "nearbyCafes": [
+            {
+              "name": "Rohtang View Stall",
+              "coordinates": {
+                "lat": 32.365,
+                "lng": 77.1605
+              }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "Guesthouse near Gulaba",
+              "rating": 4.0,
+              "priceCategory": "$",
+              "distance": "15 km",
+              "coordinates": {
+                "lat": 32.382,
+                "lng": 77.1608
+              }
+            }
+          ]
+        },
+        {
+          "name": "Old Manali — Cafés, Markets & Chill",
+          "image": "https://t4.ftcdn.net/jpg/02/57/91/21/240_F_257912197_ySuBhefKYPQIZNa3xeGiObLpgYBnH9U5.jpg",
+          "description": "Bohemian Old Manali with cozy cafés, handicraft shops, and relaxed vibes — great for evenings.",
+          "duration": "2–3 hrs",
+          "price": "Varies",
+          "tags": ["Food", "Culture", "Relax"],
+          "coordinates": {
+            "lat": 32.246,
+            "lng": 77.174
+          },
+          "nearbyCafes": [
+            {
+              "name": "Cafe 1947 (Old Manali)",
+              "coordinates": {
+                "lat": 32.2463,
+                "lng": 77.1742
+              }
+            },
+            {
+              "name": "Johnson's Cafe (Old Manali)",
+              "coordinates": {
+                "lat": 32.2457,
+                "lng": 77.1737
+              }
+            }
+          ],
+          "nearbyHotels": [
+            {
+              "name": "Hostel New Manali",
+              "rating": 4.1,
+              "priceCategory": "$",
+              "distance": "150 m",
+              "coordinates": {
+                "lat": 32.2465,
+                "lng": 77.1745
+              }
+            },
+            {
+              "name": "The Orchard House",
+              "rating": 4.5,
+              "priceCategory": "$$$",
+              "distance": "400 m",
+              "coordinates": {
+                "lat": 32.2452,
+                "lng": 77.173
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "howToReach": {
+    "nearestAirport": {
+      "name": "Bhuntar Airport (Kullu-Manali)",
+      "coordinates": {
+        "lat": 32.0065,
+        "lng": 77.261
+      }
+    },
+    "description": "Fly into Bhuntar (Kullu-Manali) or land at Chandigarh/Delhi and take a road trip. Bhuntar is the closest airport (~50 km). Regular buses and taxis connect Manali."
+  },
+  "nearbyHotels": [
+    {
+      "name": "Hotel Manali Heights",
+      "image": "https://t4.ftcdn.net/jpg/01/71/19/19/240_F_171191968_h1yWvnUTa0MM6iIBnGdAHZeUAJEh9dBh.jpg",
+      "rating": 4.2,
+      "reviews": "1.1K",
+      "priceCategory": "200$-300$",
+      "coordinates": {
+        "lat": 32.2441,
+        "lng": 77.1882
+      }
+    },
+    {
+      "name": "Hotel  Heights",
+      "image": "https://t4.ftcdn.net/jpg/01/71/19/19/240_F_171191968_h1yWvnUTa0MM6iIBnGdAHZeUAJEh9dBh.jpg",
+      "rating": 4.2,
+      "reviews": "1.1K",
+      "priceCategory": "200$-300$",
+      "coordinates": {
+        "lat": 32.2441,
+        "lng": 77.3482
+      }
+    },
+    {
+      "name": "Snow Valley Resorts",
+      "image": "https://t4.ftcdn.net/jpg/01/96/02/01/240_F_196020123_gO0XJKP1zWkKjtLQeIRV05dGcIIlIeAo.jpg",
+      "rating": 4.4,
+      "reviews": "860",
+      "priceCategory": "50$-100$",
+      "coordinates": {
+        "lat": 32.2436,
+        "lng": 77.1896
+      }
+    },
+    {
+      "name": "Snow Valley Resortss",
+      "image": "https://t4.ftcdn.net/jpg/01/96/02/01/240_F_196020123_gO0XJKP1zWkKjtLQeIRV05dGcIIlIeAo.jpg",
+      "rating": 4.4,
+      "reviews": "860",
+      "priceCategory": "50$-100$",
+      "coordinates": {
+        "lat": 32.2936,
+        "lng": 77.1896
+      }
+    }
+  ],
+  "getInspired": [
+    {
+      "title": "Manali Drone & Paragliding Highlights",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Solang_Valley%2C_Manali.jpg",
+      "videoUrl": "https://www.youtube.com/watch?v=dummy1"
+    },
+    {
+      "title": "Walking Mall Road & Old Manali Cafés",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/3/35/Mall_Road%2C_Manali%2C_Himachal_Pradesh.jpg",
+      "videoUrl": "https://www.youtube.com/watch?v=dummy2"
+    }
+  ]
+}

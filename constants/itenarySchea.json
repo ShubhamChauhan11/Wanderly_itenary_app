@@ -1,0 +1,89 @@
+{
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "country": { "type": "string" },
+    "region": { "type": "string" },
+    "rating": { "type": "number" },
+    "reviewsCount": { "type": "integer" },
+    "heroImages": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri" }
+    },
+    "coordinates": {
+      "type": "object",
+      "properties": {
+        "lat": { "type": "number" },
+        "lng": { "type": "number" }
+      },
+      "required": ["lat", "lng"]
+    },
+    "description": { "type": "string" },
+    "duration": { "type": "string" },
+    "cost": { "type": "string" },
+    "bestSeason": { "type": "array", "items": { "type": "string" } },
+    "style": { "type": "array", "items": { "type": "string" } },
+    "tabs": { "type": "array", "items": { "type": "string" } },
+    "itinerary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "day": { "type": "integer" },
+          "title": { "type": "string" },
+          "activities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "image": { "type": "string", "format": "uri" },
+                "description": { "type": "string" },
+                "duration": { "type": "string" },
+                "price": { "type": "string" },
+                "tags": { "type": "array", "items": { "type": "string" } },
+                "coordinates": {
+                  "type": "object",
+                  "properties": {
+                    "lat": { "type": "number" },
+                    "lng": { "type": "number" }
+                  }
+                },
+                "nearbyCafes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "coordinates": { "type": "object" }
+                    }
+                  }
+                },
+                "nearbyHotels": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "rating": { "type": "number" },
+                      "priceCategory": { "type": "string" },
+                      "distance": { "type": "string" },
+                      "coordinates": { "type": "object" }
+                    }
+                  }
+                }
+              },
+              "required": ["name", "description"]
+            }
+          }
+        },
+        "required": ["day", "title", "activities"]
+      }
+    },
+    "howToReach": { "type": "object" },
+    "nearbyHotels": { "type": "array", "items": { "type": "object" } },
+    "getInspired": { "type": "array", "items": { "type": "object" } }
+  },
+  "required": ["id", "title", "country", "region", "itinerary"]
+}

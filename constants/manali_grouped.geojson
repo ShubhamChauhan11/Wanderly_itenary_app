@@ -1,0 +1,343 @@
+{
+  "activities": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "activity",
+          "day": 1,
+          "name": "Mall Road (Stroll & Shops)",
+          "description": "The bustling heart of Manali for shopping, street food and relaxed evening walks along the Beas river.",
+          "tags": ["Sightseeing", "Shopping"]
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1892, 32.2433]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "activity",
+          "day": 1,
+          "name": "Hadimba (Hidimba Devi) Temple & Van Vihar",
+          "description": "Ancient pagoda-style temple set inside a cedar forest — peaceful and photogenic.",
+          "tags": ["Temple", "Nature"]
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1879, 32.2386]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "activity",
+          "day": 2,
+          "name": "Solang Valley (Paragliding, Zorbing, Ropeways)",
+          "description": "Adventure hub near Manali: paragliding in summer, skiing in winter and scenic ropeways.",
+          "tags": ["Adventure", "Nature"]
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.166, 32.259]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "activity",
+          "day": 2,
+          "name": "Jogini Falls (Short Trek from Vashisht)",
+          "description": "A pleasant short trek from Vashisht village to a scenic waterfall — great for couples and nature lovers.",
+          "tags": ["Hike", "Waterfall"]
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1817, 32.2356]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "activity",
+          "day": 3,
+          "name": "Rohtang Pass (seasonal — check permits)",
+          "description": "Snow-capped high mountain pass offering dramatic views and snow activities (open seasonally).",
+          "tags": ["Adventure", "Snow", "Scenic"]
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1601, 32.3652]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "activity",
+          "day": 3,
+          "name": "Old Manali — Cafés, Markets & Chill",
+          "description": "Bohemian Old Manali with cozy cafés, handicraft shops, and relaxed vibes — great for evenings.",
+          "tags": ["Food", "Culture", "Relax"]
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.174, 32.246]
+        }
+      }
+    ]
+  },
+  "hotels": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "hotel",
+          "name": "Snow Valley Resorts",
+          "rating": 4.4,
+          "priceCategory": "$$",
+          "distance": "200 m"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1896, 32.2436]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "hotel",
+          "name": "Hotel Manali Heights",
+          "rating": 4.2,
+          "priceCategory": "$",
+          "distance": "350 m"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1882, 32.2441]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "hotel",
+          "name": "Hotel Hadimba Heights",
+          "rating": 4.5,
+          "priceCategory": "$$$",
+          "distance": "450 m"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1872, 32.2391]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "hotel",
+          "name": "Greenwoods Inn",
+          "rating": 4.3,
+          "priceCategory": "$$",
+          "distance": "600 m"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1889, 32.2378]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "hotel",
+          "name": "Snow Peak Retreat (Solang)",
+          "rating": 4.3,
+          "priceCategory": "$$",
+          "distance": "1.2 km"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1639, 32.2571]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "hotel",
+          "name": "Solang Valley Resort",
+          "rating": 4.0,
+          "priceCategory": "$$",
+          "distance": "900 m"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1675, 32.2598]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "hotel",
+          "name": "Vashisht Homestay",
+          "rating": 4.4,
+          "priceCategory": "$",
+          "distance": "400 m"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1814, 32.2352]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "hotel",
+          "name": "Vashisht Springs Cottage",
+          "rating": 4.3,
+          "priceCategory": "$$",
+          "distance": "300 m"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1821, 32.2358]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "hotel",
+          "name": "Guesthouse near Gulaba",
+          "rating": 4.0,
+          "priceCategory": "$",
+          "distance": "15 km"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1608, 32.382]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "hotel",
+          "name": "Hostel New Manali",
+          "rating": 4.1,
+          "priceCategory": "$",
+          "distance": "150 m"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1745, 32.2465]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "hotel",
+          "name": "The Orchard House",
+          "rating": 4.5,
+          "priceCategory": "$$$",
+          "distance": "400 m"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.173, 32.2452]
+        }
+      }
+    ]
+  },
+  "cafes": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "cafe",
+          "name": "Johnson's Cafe"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1889, 32.2435]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "cafe",
+          "name": "Cafe 1947 (Old Manali branch)"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1885, 32.243]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "cafe",
+          "name": "The Lazy Dog"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1876, 32.2389]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "cafe",
+          "name": "Solang View Point Cafe"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1655, 32.2586]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "cafe",
+          "name": "Cafe D'Art (Vashisht)"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.181, 32.235]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "cafe",
+          "name": "Rohtang View Stall"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1605, 32.365]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "cafe",
+          "name": "Cafe 1947 (Old Manali)"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1742, 32.2463]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "type": "cafe",
+          "name": "Johnson's Cafe (Old Manali)"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.1737, 32.2457]
+        }
+      }
+    ]
+  }
+}
