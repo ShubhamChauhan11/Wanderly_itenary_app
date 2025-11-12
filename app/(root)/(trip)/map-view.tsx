@@ -9,7 +9,7 @@ const MapView=()=>{
     const router = useRouter();  
     return(
        <SafeAreaView className="flex-1">
-        <View className="flex flex-row w-full justify-between  !px-6  pb-4 pt-2">
+        <View className="flex flex-row w-full gap-2 !px-6  pb-4 pt-2">
         <TouchableOpacity
           onPress={() => {
             router.back();
@@ -17,10 +17,12 @@ const MapView=()=>{
         >
           <MaterialIcons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
-        <Text className="text-center font-bold text-lg">Trip Map</Text>
-        <TouchableOpacity onPress={() => {}}>
-          <MaterialIcons name="share" size={24} color="black" />
-        </TouchableOpacity>
+        
+        <Text className="text-center font-bold text-lg text-center w-[80%]">Trip Map</Text>
+        
+        {/* <TouchableOpacity onPress={() => {}}>
+          <MaterialIcons name="download" size={24} color="black" />
+        </TouchableOpacity> */}
       </View>
    <View></View>
       <Map/>

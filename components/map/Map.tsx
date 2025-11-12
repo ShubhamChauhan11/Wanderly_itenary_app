@@ -17,8 +17,8 @@ type Props = {
 };
 
 const Map: React.FC<Props> = ({ onFullMapPress }) => {
-  const trips = useTripStore((state) => state.trips);
-  const itenaryData = trips[trips.length - 1];
+     const selectedTrip= useTripStore((state) => state.selectedTrip);
+  const itenaryData =selectedTrip
   const router = useRouter();
 
   const [hasPermissions, setHasPermission] = useState(false);
@@ -64,7 +64,7 @@ const Map: React.FC<Props> = ({ onFullMapPress }) => {
 
   const markerIconConfig: Record<string, { icon: string; color: string; size: number }> = {
     activity: { icon: "map-marker", color: "#FF8A00", size: 32 },
-    hotel: { icon: "hotel", color: "#1E90FF", size: 32 },
+    hotel: { icon: "home-circle", color: "#1E90FF", size: 32 },
     airport: { icon: "airplane", color: "#00A86B", size: 32 },
     default: { icon: "hotel", color: "#555", size: 32 },
   };

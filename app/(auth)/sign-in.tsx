@@ -2,19 +2,42 @@ import CustomButton from "@/components/common/customButton";
 import CustomInput from "@/components/common/customInput";
 import AuthLayout from "@/components/layouts/authLayout";
 import { icons } from "@/constants";
-import { Link, router } from "expo-router";
+import { useSignIn } from "@clerk/clerk-expo";
+import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, Text, TouchableWithoutFeedback, View } from "react-native";
 
 const SignIn = () => {
-    const [initialFormValues, setFormValues] = useState({
+    const { signIn, setActive, isLoaded } = useSignIn()
+  const router = useRouter()
+    const [formValues, setFormValues] = useState({
         email: "",
         password: "",
     });
-    const handleLogin = () => {
-        console.log("values", initialFormValues)
+   
+    const handleLogin = async () => {
+    if (!isLoaded) return
+
+    // Start the sign-in process using the email and password provided
+    try {
+      const signInAttempt = await signIn.create({
+        identifier:formValues.email ,
+        password:formValues.password
+      })
+
+      
+      if (signInAttempt.status === 'complete') {
+        await setActive({ session: signInAttempt.createdSessionId })
         router.replace("/(root)/(tabs)/home")
+      } else {
+        
+        console.error(JSON.stringify(signInAttempt, null, 2))
+      }
+    } catch (err) {
+      
+      console.error(JSON.stringify(err, null, 2))
     }
+  }
 
     return (
         <KeyboardAvoidingView
@@ -31,6 +54,7 @@ const SignIn = () => {
                                     <CustomInput
                                         label="Email Address"
                                         LeftIcon={icons.email}
+                                        secureTextEntry={false}
                                         placeholder="you@example.com"
                                         onChangeText={(val: string) =>
                                             setFormValues(prev => ({ ...prev, email: val }))

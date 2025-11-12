@@ -1,3 +1,4 @@
+import check from "@/assets/icons/check.png";
 import close from "@/assets/icons/close.png";
 import email from "@/assets/icons/email.png";
 import google from "@/assets/icons/google.png";
@@ -10,4 +11,5 @@ export const icons = {
   lock,
   close,
   profile,
+  check,
 };

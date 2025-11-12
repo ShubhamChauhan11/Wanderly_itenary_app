@@ -5,12 +5,26 @@ import { persist } from "zustand/middleware";
 export const useTripStore = create(
   persist(
     (set, get) => ({
-      trips: [], // <-- ARRAY (NOT OBJECT)
+      trips: [],
+      selectedTrip: {}, // <-- ARRAY (NOT OBJECT)
 
       addTrip: (tripObject) => {
         set((state) => ({
           trips: [...state.trips, tripObject], // push new trip to array
         }));
+      },
+      addTrips: (tripArray) => {
+        set((set) => ({
+          trips: [...tripArray],
+        }));
+      },
+      setSelectedTrip: (trip) => {
+        set((state) => ({
+          selectedTrip: trip,
+        }));
+      },
+      getSelectedTrip: (trip) => {
+        return get().selectedTrip;
       },
 
       getTripById: (id) => {

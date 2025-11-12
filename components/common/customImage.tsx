@@ -10,7 +10,7 @@ type FallbackImageProps = {
 
 export const FallbackImage: React.FC<FallbackImageProps> = ({ query, size = 96, className }) => {
   const [url, setUrl] = useState<string | null>(null);
-  console.log("customurl", url)
+
 
   useEffect(() => {
     let mounted = true;

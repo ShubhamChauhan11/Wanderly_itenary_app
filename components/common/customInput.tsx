@@ -4,6 +4,7 @@ import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 interface inputProps {
   label?: string;
   LeftIcon?: React.ComponentType<any>;
+  
  
   placeholder: string;
   value:string,
@@ -21,7 +22,8 @@ const CustomInput = ({
   onChangeText,
   secureTextEntry,
   className,
-  onClear
+  onClear,
+  ...props
 }: inputProps) => {
   return (
    
@@ -36,6 +38,7 @@ const CustomInput = ({
           placeholderTextColor="#888"
           onChangeText={onChangeText}
           className="flex-1 text-black"
+          {...props}
         />
         {value && value.length>0 && onClear && 
         <TouchableOpacity onPress={onClear} className="w-8 h-8 rounded-full bg-gray-200 flex flex-row items-center justify-center">

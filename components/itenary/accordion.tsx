@@ -46,7 +46,7 @@ const CustomAccordion=(
     return (
         <View className="  flex-col gap-4 ">
               {data.map((section, index) => (
-                <View key={section.title} > 
+                <View key={section.title} key={section.title} > 
                   <Accordion
                     sections={[section]}
                     activeSections={

@@ -7,8 +7,8 @@ import NearbyHotels from "./hotels";
 
 
 const Itenary = () => {
-    const trips = useTripStore((state) => state.trips);
-     const tripData= trips[trips.length-1]
+      const selectedTrip= useTripStore((state) => state.selectedTrip);
+     const tripData= selectedTrip
      
  
   const dayWiseData= useMemo(()=>{

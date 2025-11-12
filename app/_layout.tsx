@@ -1,3 +1,5 @@
+import { ClerkLoaded, ClerkProvider } from '@clerk/clerk-expo';
+import { tokenCache } from "@clerk/clerk-expo/token-cache";
 import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -12,8 +14,18 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
+  
+
+  if (!publishableKey) {
+    throw new Error(
+      "Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env"
+    );
+  }
 
   return (
+    <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
+      <ClerkLoaded>
     <ThemeProvider value={ DefaultTheme}>
       <Stack>
         <Stack.Screen name="(root)" options={{ headerShown: false }} />
@@ -23,5 +35,7 @@ export default function RootLayout() {
       </Stack>
       <StatusBar style="dark" />
     </ThemeProvider>
+    </ClerkLoaded>
+    </ClerkProvider>
   );
 }

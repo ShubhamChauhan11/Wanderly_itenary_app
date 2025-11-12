@@ -2,6 +2,7 @@ import { fetchImages } from "@/lib/image";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Fontisto from "@expo/vector-icons/Fontisto";
+import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
@@ -66,6 +67,11 @@ const ItenaryItem = ({
   const [imageError, setImageError] = useState(false);
 
   const shouldShowFallback = !image || imageError;
+  const router=useRouter()
+  function showMap(){
+    router.push("/(root)/(trip)/map-view")
+
+  }
 
   return (
     <View className="flex flex-col gap-3 bg-white rounded-lg border border-gray-200 p-3">
@@ -88,12 +94,12 @@ const ItenaryItem = ({
           </Text>
 
           {/* Duration and Price Row */}
-          <View className="flex-row justify-between mt-1">
-            <View className="flex-row items-center gap-1">
+          <View className="flex-row !justify-between mt-2 gap-2 ">
+            <View className="flex-row items-start gap-1">
               <Fontisto name="clock" size={13} color="#6B7280" />
               <Text className="text-gray-500 text-[13px]">{duration}</Text>
             </View>
-            <View className="flex-row items-center gap-1">
+            <View className="flex-row items-start gap-1 flex-1 ">
               <FontAwesome name="money" size={13} color="#6B7280" />
               <Text className="text-gray-500 text-[13px]">{price}</Text>
             </View>
@@ -102,9 +108,9 @@ const ItenaryItem = ({
       </View>
 
       {/* Button */}
-      <TouchableOpacity className="w-full flex-row items-center justify-center gap-2 py-2 rounded-md bg-[#E3F2FD] mt-1">
+      <TouchableOpacity className="w-full flex-row items-center justify-center gap-2 py-2 rounded-md bg-[#E3F2FD] mt-1 " onPress={showMap}>
         <FontAwesome6 name="map" size={16} color="#0286ff" />
-        <Text className="text-[#0286ff] font-bold text-[14px]">
+        <Text className="text-[#0286ff] font-bold text-[14px]" >
           See on Map
         </Text>
       </TouchableOpacity>
