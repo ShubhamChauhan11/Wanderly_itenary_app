@@ -1,3 +1,4 @@
+import { useMapStore } from "@/store/mapStore";
 import { useTripStore } from "@/store/tripStore";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useRouter } from "expo-router";
@@ -18,6 +19,7 @@ const TripCard = ({
   trip: {};
 }) => {
   const router = useRouter();
+  const setRegionCoords = useMapStore((state) => state.setRegionCoords);
   return (
     <View className="flex flex-row items-center gap-4 !h-[120px]  rounded-xl bg-white shadow-md">
       <CustomImage
@@ -41,6 +43,13 @@ const TripCard = ({
           <TouchableOpacity
             onPress={() => {
               useTripStore.getState().setSelectedTrip(trip);
+              setRegionCoords({
+                latitude: trip.coordinates.lat,
+                longitude: trip.coordinates.lng,
+                latitudeDelta: 1,
+                longitudeDelta: 1,
+              });
+
               router.push("/(root)/(trip)/trip-details");
             }}
           >

@@ -23,7 +23,8 @@ const Itenary = () => {
            description: each.description,
            duration: each.duration,
            price: each.price,
-            tags: each.tags
+            tags: each.tags,
+            coordinates: each.coordinates
          }))
          arr.push(obj);
     })

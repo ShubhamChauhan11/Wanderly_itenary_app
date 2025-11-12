@@ -29,13 +29,13 @@ const Welcome = () => {
 
         
           <View className="absolute bottom-4 left-4 mb-2 w-[85%]">
-            <Text className="text-white font-bold text-[20px]">
-              Your next adventure starts here
+            <Text className="text-white font-bold text-[24px]">
+              Your next adventure starts here.
             </Text>
 
             <Text
-              className="text-white text-[16px] mt-2"
-              numberOfLines={3}
+              className="text-white text-[16px] mt-2 italic"
+            
               ellipsizeMode="tail"
             >
               Plan your trip with us, get personalized itineraries,  and explore

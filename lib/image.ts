@@ -67,6 +67,12 @@ export async function refreshTripImages(trip: any): Promise<any> {
       hotel.image = newImg[0] || hotel.image;
     }
   }
+  for (const cafe of updatedTrip.nearbyCafes ?? []) {
+    if (cafe.image && !(await validateImage(cafe.image))) {
+      const newImg = await fetchImages({ query: cafe.name, n: 1 });
+      cafe.image = newImg[0] || cafe.image;
+    }
+  }
 
   // ---- GET INSPIRED IMAGES ----
   for (const insp of updatedTrip.getInspired ?? []) {

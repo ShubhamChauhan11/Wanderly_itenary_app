@@ -31,6 +31,7 @@ const CustomAccordion=(
     return (
     <View className="p-4 bg-white rounded-b-lg flex flex-col gap-4  ">
        {section.content.map((item)=>{
+        
         return (
             <ItenaryItem key={item.name} {...item}/>
         )
@@ -41,12 +42,12 @@ const CustomAccordion=(
   const updateSections = (active: number[]) => {
     setActiveSections(active);
   };
-  console.log("active", activeSections)
+  
  
     return (
-        <View className="  flex-col gap-4 ">
+        <View className=" flex-col gap-4 ">
               {data.map((section, index) => (
-                <View key={section.title} key={section.title} > 
+                <View key={section.title}  > 
                   <Accordion
                     sections={[section]}
                     activeSections={

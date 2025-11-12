@@ -4,12 +4,14 @@ import CheckboxButton from "@/components/ui/checkBoxButton";
 import Counter from "@/components/ui/counter";
 import { fetchAPI } from "@/lib/fetch";
 import { refreshTripImages } from "@/lib/image";
+import { useMapStore } from "@/store/mapStore";
 import { useUser } from "@clerk/clerk-expo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { GoogleGenAI } from "@google/genai";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import {
+  Alert,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -62,6 +64,10 @@ The JSON must match exactly this schema and key names, using the same data types
   "nearbyHotels": [
     { "name": "string", "image": "string | null", "rating": number | null, "reviews": "string | null", "priceCategory": "string | null", "coordinates": { "lat": number | null, "lng": number | null } }
   ],
+  "nearbyCafes":[
+  { "name": "string", "image": "string | null", "rating": number | null, "reviews": "string | null", "priceCategory": "string | null", "coordinates": { "lat": number | null, "lng": number | null } }
+
+  ]
   "getInspired": [
     { "title": "string", "thumbnail": "string | null", "videoUrl": "string | null" }
   ]
@@ -113,11 +119,7 @@ const Home = () => {
   const { user, isSignedIn } = useUser();
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [destination, setDestination] = useState(null);
-  const trips = useTripStore((state) => state.trips);
-  const resetStoreAndStorage = useTripStore(
-    (state) => state.resetStoreAndStorage
-  );
-
+  const setRegionCoords = useMapStore((state) => state.setRegionCoords);
   const ai = new GoogleGenAI({
     apiKey: `${process.env.EXPO_PUBLIC_GEN_AI_KEY}`,
   });
@@ -148,14 +150,17 @@ const Home = () => {
     let data = await fetchAPI(`/(api)/get-trips?clerkId=${user.id}`, {
       method: "GET",
     });
+   
 
     useTripStore.getState().addTrips(data.trips);
 
     return data;
   }
 
-  const getSuggestion = async () => {
+ const getSuggestion = async () => {
+  try {
     setLoading(true);
+
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: prompt
@@ -164,28 +169,44 @@ const Home = () => {
         .replace("{CATEGORIES}", selectedCategories),
     });
 
+    if (!response?.text) {
+      throw new Error("Empty response received from AI model");
+    }
+
     const cleanedRes = response.text
       .replace(/^```json/i, "")
       .replace(/^```/, "")
       .replace(/```$/, "")
       .trim();
-    console.log("trip without images", JSON.parse(cleanedRes));
-    const tripWithImages = await refreshTripImages(JSON.parse(cleanedRes));
-    console.log("trip with images", tripWithImages);
 
-    // await fetchAPI("/(api)/trips", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     trip: tripWithImages,
-    //     clerkId: user?.id,
-    //   }),
-    // });
-    //  useTripStore.getState().addTrip(tripWithImages);
+    const parsedTrip = JSON.parse(cleanedRes);
+
+    const tripWithImages = await refreshTripImages(parsedTrip);
+
     useTripStore.getState().setSelectedTrip(tripWithImages);
 
-    setLoading(false);
+    setRegionCoords({
+      latitude: tripWithImages.coordinates.lat,
+      longitude: tripWithImages.coordinates.lng,
+      latitudeDelta: 1,
+      longitudeDelta: 1,
+    });
+
     router.push("/(root)/(trip)/trip-details");
-  };
+  } catch (err) {
+    console.log("Error:", err);
+
+    Alert.alert(
+      "Something went wrong",
+      "Unable to generate trip details. Please try again.",
+      [{ text: "OK" }]
+    );
+  } finally {
+   
+    setLoading(false);
+  }
+};
+
   const changeDestination = (value: string) => {
     return setDestination(value);
   };

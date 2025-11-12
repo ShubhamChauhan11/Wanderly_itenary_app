@@ -2,28 +2,37 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import * as Location from "expo-location";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Platform, Text, TouchableOpacity, View } from "react-native";
-import MapView, { Callout, LatLng, Marker, PROVIDER_DEFAULT } from "react-native-maps";
+import { Image, Platform, Text, TouchableOpacity, View } from "react-native";
+import MapView, {
+  Callout,
+  Marker,
+  PROVIDER_DEFAULT
+} from "react-native-maps";
 
-import { calculateRegion, tripToFeatureCollection } from "@/lib/map";
+import { tripToFeatureCollection } from "@/lib/map";
 import { useTripStore } from "@/store/tripStore";
 
-import { useRouter } from "expo-router";
+import { icons } from "@/constants";
+import { useMapStore } from "@/store/mapStore";
+import { usePathname, useRouter } from "expo-router";
 import { CustomImage } from "../common/customImage";
-
 
 type Props = {
   onFullMapPress?: (fc?: any) => void; // optional custom handler
 };
 
 const Map: React.FC<Props> = ({ onFullMapPress }) => {
-     const selectedTrip= useTripStore((state) => state.selectedTrip);
-  const itenaryData =selectedTrip
+  const selectedTrip = useTripStore((state) => state.selectedTrip);
+  const itenaryData = selectedTrip;
   const router = useRouter();
 
   const [hasPermissions, setHasPermission] = useState(false);
   const [region, setRegion] = useState<any | null>(null);
   const mapRef = useRef<MapView | null>(null);
+  const pathname = usePathname();
+
+   const regionCoords = useMapStore((state) => state.regionCoords);
+   
 
   useEffect(() => {
     (async () => {
@@ -35,91 +44,51 @@ const Map: React.FC<Props> = ({ onFullMapPress }) => {
 
       setHasPermission(true);
 
-      // get current location but we won't use it for region in this example
-      const location = await Location.getCurrentPositionAsync({});
-      // Reverse geocode is optional; you already had it
-      // const address = await Location.reverseGeocodeAsync({
-      //   latitude: location.coords?.latitude!,
-      //   longitude: location.coords?.longitude!,
-      // });
+      // const location = await Location.getCurrentPositionAsync({});
 
-      // Use calculateRegion as you already used (small delta for closer zoom)
-      const startRegion = calculateRegion({
-        userLatitude: itenaryData.coordinates.lat,
-        userLongitude: itenaryData.coordinates.lng,
-        destinationLatitude: itenaryData.coordinates.lat,
-        destinationLongitude: itenaryData.coordinates.lng,
-      });
-
-      // If calculateRegion returns tiny deltas (due to zeros), tighten them for zoom
-      const regionWithZoom = {
-        ...startRegion,
-        latitudeDelta: startRegion.latitudeDelta || 0.01,
-        longitudeDelta: startRegion.longitudeDelta || 0.01,
+      
+      const startRegion = {
+        ...regionCoords
       };
+      // mapRef?.current.animateToRegion(startRegion, 3000); 
 
-      setRegion(regionWithZoom);
+      setRegion(startRegion);
     })();
-  }, [itenaryData]);
+  }, [regionCoords]);
 
-  const markerIconConfig: Record<string, { icon: string; color: string; size: number }> = {
-    activity: { icon: "map-marker", color: "#FF8A00", size: 32 },
-    hotel: { icon: "home-circle", color: "#1E90FF", size: 32 },
-    airport: { icon: "airplane", color: "#00A86B", size: 32 },
-    default: { icon: "hotel", color: "#555", size: 32 },
+  const markerIconConfig: Record<
+    string,
+    { icon: any; color?: string; size?: number }
+  > = {
+    activity: { icon: "map-marker", color: "#718ffcff", size: 32 },
+    hotel: { icon:  <Image source={icons.hotel} className={`w-10 h-10 text-black `} /> },
+    airport: { icon: <Image source={icons.plane} className={`w-10 h-10 text-black `} /> },
+    cafe: { icon:  <Image source={icons.cutlery} className={`w-10 h-10 text-black `} /> },
+
+    default: { icon:  <Image source={icons.point} className={`w-10 h-10 text-black `} /> },
   };
 
   const fc = useMemo(() => tripToFeatureCollection(itenaryData), [itenaryData]);
-
-  // helper to build LatLng[] from features for fitToCoordinates
-  const featureLatLngs = useMemo(() => {
-    return fc.features
-      .map((f: any) => {
-        const coords = f.geometry?.coordinates;
-        if (!coords || coords.length < 2) return null;
-        return { latitude: coords[1], longitude: coords[0] } as LatLng;
-      })
-      .filter(Boolean) as LatLng[];
-  }, [fc]);
-
-  // default handler for full-map button: fit to all coordinates
-  const defaultFullMapHandler = () => {
-    if (!mapRef.current || featureLatLngs.length === 0) return;
-
-    try {
-      mapRef.current.fitToCoordinates(featureLatLngs, {
-        edgePadding: { top: 80, right: 80, bottom: 160, left: 80 },
-        animated: true,
-      });
-    } catch (err) {
-      // fallback: animate to center of first feature
-      const first = featureLatLngs[0];
-      if (first) {
-        mapRef.current.animateToRegion(
-          {
-            latitude: first.latitude,
-            longitude: first.longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
-          },
-          500
-        );
-      }
-    }
-  };
-
-  // pressed the floating full-map button
+  
+  
   const handleFullMapPress = () => {
     if (typeof onFullMapPress === "function") {
       onFullMapPress(fc);
     } else {
-     router.push("/(root)/(trip)/map-view")
+      if(pathname!=="/map-view"){
+      router.push("/(root)/(trip)/map-view");
+      }
     }
   };
 
-  if (!region) {
-    return <View className="h-72 w-full items-center justify-center"><Text>Loading map…</Text></View>;
-  }
+  // if (!region) {
+  //   return (
+  //     <View className="h-72 w-full items-center justify-center">
+  //       <Text>Loading map…</Text>
+  //     </View>
+  //   );
+  // }
+  console.log("fc is", fc)
 
   return (
     <View className="flex-1 h-[300px]">
@@ -141,26 +110,42 @@ const Map: React.FC<Props> = ({ onFullMapPress }) => {
           const type = feature.properties.featureType;
           const icon = markerIconConfig[type] ?? markerIconConfig.default;
 
-          const title = feature.properties?.name ?? feature.properties?.tripTitle ?? "Place";
+          const title =
+            feature.properties?.name ??
+            feature.properties?.tripTitle ??
+            "Place";
           const day = feature.properties?.day;
           const desc = feature.properties?.description ?? "";
-          const image = feature.properties?.image ?? feature.properties?.raw?.image ?? null;
+          const image =
+            feature.properties?.image ?? feature.properties?.raw?.image ?? null;
 
           return (
-            <Marker key={index} coordinate={{ latitude: lat, longitude: lng }} tracksViewChanges={false}>
+            <Marker
+              key={index}
+              coordinate={{ latitude: lat, longitude: lng }}
+              tracksViewChanges={false}
+            >
               <View className="items-center">
-                <MaterialCommunityIcons name={icon.icon} size={icon.size} color={icon.color} />
+                {icon.icon}
 
                 {type === "activity" && (
-                  <View className="mt-1 px-2 py-1 rounded-md" style={{ backgroundColor: icon.color }}>
-                    <Text className="text-white text-[11px] font-extrabold">Day {day}</Text>
+                  <View
+                    className="mt-1 px-2 py-1 rounded-md"
+                    style={{ backgroundColor: icon.color }}
+                  >
+                    <Text className="text-white text-[11px] font-extrabold">
+                      Day {day}
+                    </Text>
                   </View>
                 )}
 
                 <Callout tooltip={Platform.OS !== "android"}>
                   <View className="w-56 p-2 rounded-lg bg-white shadow-lg">
                     <View className="flex-row justify-between items-center mb-2">
-                      <Text className="text-base font-bold flex-1 mr-2" numberOfLines={1}>
+                      <Text
+                        className="text-base font-bold flex-1 mr-2"
+                        numberOfLines={1}
+                      >
                         {title}
                       </Text>
                       {type === "activity" && day !== undefined && (
@@ -169,7 +154,11 @@ const Map: React.FC<Props> = ({ onFullMapPress }) => {
                     </View>
 
                     {image ? (
-                      <CustomImage className="w-full h-24 rounded-md mb-2" image={image} name={title} />
+                      <CustomImage
+                        className="w-full h-24 rounded-md mb-2"
+                        image={image}
+                        name={title}
+                      />
                     ) : null}
 
                     {desc ? (

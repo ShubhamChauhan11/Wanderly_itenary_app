@@ -13,6 +13,7 @@ import CustomButton from "@/components/common/customButton";
 import CustomInput from "@/components/common/customInput";
 import { fetchAPI } from "@/lib/fetch";
 import { exportTripAsPDF } from "@/lib/trip";
+import { useMapStore } from "@/store/mapStore";
 import { useTripStore } from "@/store/tripStore";
 import { useUser } from "@clerk/clerk-expo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -33,7 +34,16 @@ const TripDetails = () => {
   ];
 
   const [activeTab, setActiveTab] = useState(tabs[0].value);
+  const regionCoords = useMapStore((state) => state.regionCoords);
+   const setRegionCoords = useMapStore((state) => state.setRegionCoords);
   const onTabChange = (val: string) => {
+    if(val==="map"){
+        setRegionCoords({
+            ...regionCoords,
+            latitudeDelta:1,
+            longitudeDelta:1
+        })
+    }
     setActiveTab(val);
   };
 
@@ -56,20 +66,20 @@ const TripDetails = () => {
           </Text>
         </View>
         <View className="flex flex-row gap-4 items-center ">
-         <TouchableOpacity
-                onPress={() => {
-                  setShowSaveModal(true);
-                }}
-              >
-                <FontAwesome name="save" size={22} color="green" />
-              </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            exportTripAsPDF(tripData);
-          }}
-        >
-          <MaterialIcons name="download" size={24} color="black" />
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setShowSaveModal(true);
+            }}
+          >
+            <FontAwesome name="save" size={22} color="green" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              exportTripAsPDF(tripData);
+            }}
+          >
+            <MaterialIcons name="download" size={24} color="black" />
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -81,17 +91,13 @@ const TripDetails = () => {
           />
         </View>
 
-        <View className="flex flex-col gap-4 px-4">
+        <View className="flex flex-col flex-1 gap-4 px-4">
           <View className="flex  flex-col gap-[1px]">
-            
-              <Text className="text-[20px] font-bold ">
-                {tripData.title}
-              </Text>
-             
-           
-            <Text className="text-[14px] font-bold flex-[0.8]">
-                {tripData.region}
-              </Text>
+            <Text className="text-[20px] font-bold ">{tripData.title}</Text>
+
+            <Text className="text-[14px] font-bold ">
+              {tripData.region}
+            </Text>
             <Text className="text-gray-500 text-lg">{tripData.country}</Text>
             <Text className="text-md">{tripData.description}</Text>
           </View>
@@ -149,8 +155,8 @@ function SaveModal({
       }),
     });
     useTripStore.getState().addTrip(tripDetails);
-     useTripStore.getState().setSelectedTrip(tripDetails)
-    onModalClose()
+    useTripStore.getState().setSelectedTrip(tripDetails);
+    onModalClose();
   }, [tripName]);
   return (
     <Modal isVisible={showModal} onBackdropPress={onModalClose}>

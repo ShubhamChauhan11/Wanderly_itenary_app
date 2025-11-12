@@ -19,10 +19,10 @@ const CustomTab = ({ tabs, active, containerStyle, onTabChange }: tabProps) => {
         return tabs.filter((ele)=>ele.value===active)[0].content
 
     },[active, tabs])
-    console.log("actie", ActiveTabContent)
+   
     return (
-        <View className="flex flex-col gap-4">
-        <View className="flex  flex-row justify-between gap-4">
+        <View className="flex flex-1 flex-col gap-4">
+        <View className="flex flex-row justify-between gap-4">
             {tabs.map((tab) => {
                 return (
                     <TouchableOpacity
@@ -48,7 +48,7 @@ const CustomTab = ({ tabs, active, containerStyle, onTabChange }: tabProps) => {
                 );
             })}
         </View>
-        <View>
+        <View className="flex-1">
             <ActiveTabContent/>
         </View>
         

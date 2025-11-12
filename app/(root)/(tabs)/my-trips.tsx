@@ -48,7 +48,7 @@ const MyTrips = () => {
       className="flex-1"
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <>
+        <View>
           <SafeAreaView>
             <View className="px-4 pt-4 flex-flex-col gap-4">
               <View>
@@ -89,7 +89,7 @@ const MyTrips = () => {
               })}
             </View>
           </ScrollView>
-        </>
+        </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );

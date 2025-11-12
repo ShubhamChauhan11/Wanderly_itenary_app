@@ -13,8 +13,8 @@ export const calculateRegion = ({
     return {
       latitude: 37.78825,
       longitude: -122.4324,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01,
+      latitudeDelta: 0.05,
+      longitudeDelta: 0.05,
     };
   }
 
@@ -22,8 +22,8 @@ export const calculateRegion = ({
     return {
       latitude: userLatitude,
       longitude: userLongitude,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01,
+      latitudeDelta: 0.05,
+      longitudeDelta: 0.05,
     };
   }
 
@@ -32,19 +32,19 @@ export const calculateRegion = ({
   const minLng = Math.min(userLongitude, destinationLongitude);
   const maxLng = Math.max(userLongitude, destinationLongitude);
 
-  const latitudeDelta = (maxLat - minLat) * 0.01; // Adding some padding
-  const longitudeDelta = (maxLng - minLng) * 0.01; // Adding some padding
+  const paddingFactor = 100; // 🔥 zoom OUT (higher = more zoom-out)
 
-  const latitude = (userLatitude + destinationLatitude) / 2;
-  const longitude = (userLongitude + destinationLongitude) / 2;
+  const latitudeDelta = Math.abs(maxLat - minLat) * paddingFactor || 0.05;
+  const longitudeDelta = Math.abs(maxLng - minLng) * paddingFactor || 0.05;
 
   return {
-    latitude,
-    longitude,
+    latitude: (userLatitude + destinationLatitude) / 2,
+    longitude: (userLongitude + destinationLongitude) / 2,
     latitudeDelta,
     longitudeDelta,
   };
 };
+
 // GeoJSON types (minimal)
 type GeoJSONPoint = { type: "Point"; coordinates: [number, number] } | null;
 type GeoJSONFeature = {
@@ -57,7 +57,6 @@ type GeoJSONFeatureCollection = {
   features: GeoJSONFeature[];
 };
 
-// Replace `any` with your trip type if you have a TypeScript interface.
 export function tripToFeatureCollection(trip: any): GeoJSONFeatureCollection {
   const features: GeoJSONFeature[] = [];
 
@@ -137,6 +136,25 @@ export function tripToFeatureCollection(trip: any): GeoJSONFeatureCollection {
     });
   }
 
+  if (Array.isArray(trip.nearbyCafes)) {
+    trip.nearbyCafes.forEach((h: any, idx: number) => {
+      const coords =
+        h?.coordinates && h.coordinates.lat != null && h.coordinates.lng != null
+          ? ([h.coordinates.lng, h.coordinates.lat] as [number, number])
+          : null;
+
+      features.push({
+        type: "Feature",
+        geometry: coords ? { type: "Point", coordinates: coords } : null,
+        properties: {
+          featureType: "cafe",
+          name: h.name ?? null,
+          raw: h,
+        },
+      });
+    });
+  }
+
   // Optionally add nearestAirport as a feature
   if (trip.howToReach?.nearestAirport) {
     const a = trip.howToReach.nearestAirport;
@@ -163,14 +181,12 @@ export function tripToFeatureCollection(trip: any): GeoJSONFeatureCollection {
   };
 }
 
-/** Helper: returns only activity features from a FeatureCollection */
 export function getActivityFeatures(
   fc: GeoJSONFeatureCollection
 ): GeoJSONFeature[] {
   return fc.features.filter((f) => f.properties?.featureType === "activity");
 }
 
-/** Helper: filter activities by day number */
 export function filterActivitiesByDay(
   fc: GeoJSONFeatureCollection,
   day: number
@@ -180,8 +196,8 @@ export function filterActivitiesByDay(
   );
 }
 export function computeRegionFromCoords(
-  coords: [],
-  paddingFactor = 1.3
+  coords: { latitude: number; longitude: number }[],
+  paddingFactor = 1.5 // 🔥 less padding = more zoom-in
 ): {
   latitude: number;
   longitude: number;
@@ -192,8 +208,8 @@ export function computeRegionFromCoords(
     return {
       latitude: 37.78825,
       longitude: -122.4324,
-      latitudeDelta: 0.02,
-      longitudeDelta: 0.02,
+      latitudeDelta: 0.05,
+      longitudeDelta: 0.05,
     };
   }
 
@@ -203,17 +219,18 @@ export function computeRegionFromCoords(
   let maxLng = coords[0].longitude;
 
   coords.forEach((c) => {
-    if (c.latitude < minLat) minLat = c.latitude;
-    if (c.latitude > maxLat) maxLat = c.latitude;
-    if (c.longitude < minLng) minLng = c.longitude;
-    if (c.longitude > maxLng) maxLng = c.longitude;
+    minLat = Math.min(minLat, c.latitude);
+    maxLat = Math.max(maxLat, c.latitude);
+    minLng = Math.min(minLng, c.longitude);
+    maxLng = Math.max(maxLng, c.longitude);
   });
 
   const latCenter = (minLat + maxLat) / 2;
   const lngCenter = (minLng + maxLng) / 2;
-  // small delta guard for single point
-  const latDelta = Math.max((maxLat - minLat) * paddingFactor, 0.01);
-  const lngDelta = Math.max((maxLng - minLng) * paddingFactor, 0.01);
+
+  // ✅ smaller deltas give higher zoom
+  const latDelta = (maxLat - minLat) * paddingFactor || 0.02;
+  const lngDelta = (maxLng - minLng) * paddingFactor || 0.02;
 
   return {
     latitude: latCenter,

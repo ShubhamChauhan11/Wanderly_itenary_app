@@ -1,4 +1,5 @@
 import { fetchImages } from "@/lib/image";
+import { useMapStore } from "@/store/mapStore";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Fontisto from "@expo/vector-icons/Fontisto";
@@ -63,12 +64,21 @@ const ItenaryItem = ({
   description,
   duration,
   price,
+  ...props
 }: ItemInterface) => {
+   
   const [imageError, setImageError] = useState(false);
+  const setRegionCoords= useMapStore((state)=>state.setRegionCoords)
 
   const shouldShowFallback = !image || imageError;
   const router=useRouter()
   function showMap(){
+     setRegionCoords({
+                latitude: props?.coordinates.lat,
+                longitude: props?.coordinates.lng,
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01,
+              });
     router.push("/(root)/(trip)/map-view")
 
   }
