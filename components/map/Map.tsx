@@ -61,9 +61,9 @@ const Map: React.FC<Props> = ({ onFullMapPress }) => {
     { icon: any; color?: string; size?: number }
   > = {
     activity: { icon: "map-marker", color: "#718ffcff", size: 32 },
-    hotel: { icon:  <Image source={icons.hotel} className={`w-10 h-10 text-black `} /> },
-    airport: { icon: <Image source={icons.plane} className={`w-10 h-10 text-black `} /> },
-    cafe: { icon:  <Image source={icons.cutlery} className={`w-10 h-10 text-black `} /> },
+    hotel: { icon:  icons.hotel },
+    airport: { icon: icons.plane },
+    cafe: { icon:  icons.cutlery },
 
     default: { icon:  <Image source={icons.point} className={`w-10 h-10 text-black `} /> },
   };
@@ -88,7 +88,7 @@ const Map: React.FC<Props> = ({ onFullMapPress }) => {
   //     </View>
   //   );
   // }
-  console.log("fc is", fc)
+
 
   return (
     <View className="flex-1 h-[300px]">
@@ -126,7 +126,7 @@ const Map: React.FC<Props> = ({ onFullMapPress }) => {
               tracksViewChanges={false}
             >
               <View className="items-center">
-                {icon.icon}
+               
 
                 {type === "activity" && (
                   <View
@@ -138,6 +138,7 @@ const Map: React.FC<Props> = ({ onFullMapPress }) => {
                     </Text>
                   </View>
                 )}
+                 <Image source={icon.icon} className={`w-10 h-10 text-black `} />
 
                 <Callout tooltip={Platform.OS !== "android"}>
                   <View className="w-56 p-2 rounded-lg bg-white shadow-lg">

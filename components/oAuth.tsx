@@ -31,14 +31,14 @@ const Oauth = ({ className }: { className?: string }) => {
     try {
       // useProxy true works well in Expo dev; tweak for prod with custom scheme
       const redirectUrl = AuthSession.makeRedirectUri({ useProxy: true });
-      console.log("Using redirectUrl:", redirectUrl);
+     
 
       const result = await startSSOFlow({
         strategy: "oauth_google",
         redirectUrl,
       });
 
-      console.log("startSSOFlow raw result:", result);
+      
 
       // 1) prefer createdSessionId if present
       let createdSessionId = result?.createdSessionId ?? null;

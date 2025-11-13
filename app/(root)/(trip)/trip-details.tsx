@@ -3,9 +3,10 @@ import CustomTab from "@/components/common/customTab";
 import DetailCard from "@/components/common/detailCard";
 import Itenary from "@/components/itenary/Itenary";
 import Map from "@/components/map/Map";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { router } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -35,21 +36,29 @@ const TripDetails = () => {
 
   const [activeTab, setActiveTab] = useState(tabs[0].value);
   const regionCoords = useMapStore((state) => state.regionCoords);
-   const setRegionCoords = useMapStore((state) => state.setRegionCoords);
+  const setRegionCoords = useMapStore((state) => state.setRegionCoords);
   const onTabChange = (val: string) => {
-    if(val==="map"){
-        setRegionCoords({
-            ...regionCoords,
-            latitudeDelta:1,
-            longitudeDelta:1
-        })
+    if (val === "map") {
+      setRegionCoords({
+        ...regionCoords,
+        latitudeDelta: 1,
+        longitudeDelta: 1,
+      });
     }
     setActiveTab(val);
   };
 
+  const { user, isSignedIn } = useUser();
   const selectedTrip = useTripStore((state) => state.selectedTrip);
   const tripData = selectedTrip;
+  const trips = useTripStore((state) => state.trips);
+  const showDelete = useMemo(() => {
+    return trips.some((obj) => obj.id === selectedTrip.id);
+  }, [trips, selectedTrip]);
+
   const [showSaveModal, setShowSaveModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   return (
     <SafeAreaView className="flex-1 ">
       <View className="flex  flex-row w-full justify-between  !px-6  pb-4 pt-2">
@@ -95,9 +104,7 @@ const TripDetails = () => {
           <View className="flex  flex-col gap-[1px]">
             <Text className="text-[20px] font-bold ">{tripData.title}</Text>
 
-            <Text className="text-[14px] font-bold ">
-              {tripData.region}
-            </Text>
+            <Text className="text-[14px] font-bold ">{tripData.region}</Text>
             <Text className="text-gray-500 text-lg">{tripData.country}</Text>
             <Text className="text-md">{tripData.description}</Text>
           </View>
@@ -119,11 +126,31 @@ const TripDetails = () => {
               trip={TripDetails}
             />
           </View>
+          {showDelete && (
+            <TouchableOpacity
+              onPress={() => {
+                setShowDeleteModal(true);
+              }}
+              className="w-full flex-1 flex-row  bg-red-300 py-4 flex justify-center items-center rounded-lg "
+            >
+              <AntDesign name="delete" size={22} color="red" />
+              <Text className="text-red-600 text-lg font-bold ml-2">
+                Delete Trip
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
         <SaveModal
           showModal={showSaveModal}
           onModalClose={() => {
             setShowSaveModal(false);
+          }}
+          trip={tripData}
+        />
+        <DeleteModal
+          showModal={showDeleteModal}
+          onModalClose={() => {
+            setShowDeleteModal(false);
           }}
           trip={tripData}
         />
@@ -179,6 +206,62 @@ function SaveModal({
           onPress={saveTrip}
           disabled={!tripName}
         />
+      </View>
+    </Modal>
+  );
+}
+function DeleteModal({
+  showModal,
+  onModalClose,
+  trip,
+}: {
+  showModal: boolean;
+  onModalClose: () => void;
+  trip?: {};
+}) {
+  const [tripName, setTripName] = useState(trip?.title);
+  const { user, isSignedIn } = useUser();
+  const deleteTrip = async () => {
+    let response = await fetchAPI("/(api)/delete-trip", {
+      method: "POST",
+      body: JSON.stringify({
+        tripId: trip.id,
+        clerkId: user?.id,
+      }),
+    });
+
+    if (response && response.data) {
+      useTripStore.getState().addTrips(response.data.trips);
+      router.replace("/(root)/(tabs)/home");
+    }
+  };
+
+  return (
+    <Modal isVisible={showModal} onBackdropPress={onModalClose}>
+      <View className="bg-white px-7 py-4 rounded-2xl min-h-[230px] flex flex-col items-center justify-center">
+        <View className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center">
+          <AntDesign name="delete" size={28} color="red" />
+        </View>
+        <Text className="text-center text-red-500 font-bold mt-2">
+          {" "}
+          Are you Sure you want to delete the current trip?
+        </Text>
+        <View className="flex flex-row justify-center items-center gap-2 flex-1">
+          <CustomButton
+            className="py-2 px-4 flex-1 "
+            title="Cancel"
+            bgVariant="outline"
+            textVariant="primary"
+            onPress={onModalClose}
+          />
+          <CustomButton
+            className=" py-2 px-4 flex-1  "
+            title="Delete"
+            onPress={deleteTrip}
+            textVariant="danger"
+            bgVariant="danger"
+          />
+        </View>
       </View>
     </Modal>
   );

@@ -32,7 +32,7 @@ const CustomButton: React.FC<Props> = ({
       case "secondary":
         return "bg-gray-500";
       case "danger":
-        return "bg-red-500";
+        return "bg-red-200";
       case "success":
         return "bg-green-500";
       case "outline":
@@ -49,7 +49,7 @@ const CustomButton: React.FC<Props> = ({
       case "secondary":
         return "text-gray-100";
       case "danger":
-        return "text-red-100";
+        return "text-red-500";
       case "success":
         return "text-green-100";
       default:

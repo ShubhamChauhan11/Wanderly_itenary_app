@@ -16,7 +16,6 @@ export const fetchImages = async ({
 
     // Extract only the required image URLs
     const imageUrls = data.results.map((img: any) => img.urls.small);
-    console.log("imageurls", imageUrls, data);
 
     return imageUrls;
   } catch (err) {
