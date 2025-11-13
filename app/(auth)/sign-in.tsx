@@ -5,10 +5,12 @@ import { icons } from "@/constants";
 import { useSignIn } from "@clerk/clerk-expo";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
-import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, Text, TouchableWithoutFeedback, View } from "react-native";
+import { Alert, Keyboard, KeyboardAvoidingView, Platform, ScrollView, Text, TouchableWithoutFeedback, View } from "react-native";
 
 const SignIn = () => {
     const { signIn, setActive, isLoaded } = useSignIn()
+    
+    
   const router = useRouter()
     const [formValues, setFormValues] = useState({
         email: "",
@@ -24,7 +26,7 @@ const SignIn = () => {
         identifier:formValues.email ,
         password:formValues.password
       })
-
+     
       
       if (signInAttempt.status === 'complete') {
         await setActive({ session: signInAttempt.createdSessionId })
@@ -36,6 +38,7 @@ const SignIn = () => {
     } catch (err) {
       
       console.error(JSON.stringify(err, null, 2))
+       Alert.alert(err?.errors[0]?.longMessage);
     }
   }
 

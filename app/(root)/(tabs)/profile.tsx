@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const Profile = () => {
   const { user, isSignedIn } = useUser();
-  console.log("user", user);
+  
   const profileDetails = {
     name: "Alexandar Smith",
     email: "alexandar@xyz.com",
@@ -42,7 +42,7 @@ const Profile = () => {
           <View className="w-24 h-24 rounded-full bg-black justify-center items-center mb-2">
             <Image source={icons.profile} className={`w-18 h-18 text-black `} />
           </View>
-          <Text className="text-lg font-bold">{user?.username}</Text>
+          <Text className="text-lg font-bold">{user?.username || user?.fullName}</Text>
           <Text className="text-md font-bold text-gray-500">
             {user?.primaryEmailAddress.emailAddress}
           </Text>

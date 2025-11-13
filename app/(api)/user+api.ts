@@ -17,9 +17,9 @@ export async function POST(request: Request) {
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
     const body = await request.json();
-    const { name, email, clerkId } = body ?? {};
+    const { firstName, lastName, email, clerkId } = body ?? {};
 
-    if (!name || !email || !clerkId) {
+    if (!firstName || !lastName || !email || !clerkId) {
       return Response.json(
         { error: "Missing required fields: name, email, clerkId" },
         { status: 400 }
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     // Insert into 'users' table. Adjust column names if different (e.g., clerk_id).
     const { data, error } = await supabase
       .from("user")
-      .insert([{ name, email, clerk_id: clerkId }])
+      .insert([{ firstName, lastName, email, clerk_id: clerkId }])
       .select()
       .single();
 

@@ -1,74 +1,118 @@
 import { icons } from "@/constants";
 import { useSSO } from "@clerk/clerk-expo";
-import * as AuthSession from 'expo-auth-session';
+import * as AuthSession from "expo-auth-session";
 import { useRouter } from "expo-router";
 import { useCallback } from "react";
-import { Image, Text, View } from "react-native";
+import { Alert, Image, Linking, Text, View } from "react-native";
 import CustomButton from "./common/customButton";
 
-
-const Oauth=({className}:{className?:string})=>{
-  const { startSSOFlow } = useSSO()
-  const router= useRouter()
+const Oauth = ({ className }: { className?: string }) => {
+  const { startSSOFlow } = useSSO();
+  const router = useRouter();
+  function extractQueryParam(url: string | null | undefined, key: string) {
+    if (!url) return null;
+    // url may be like "exp://host?created_session_id=...&rotating_token_nonce=..."
+    const q = url.split("?")[1];
+    if (!q) return null;
+    try {
+      const params = new URLSearchParams(q);
+      return params.get(key);
+    } catch (e) {
+      // Fallback for very odd input
+      const pairs = q.split("&");
+      for (const p of pairs) {
+        const [k, v] = p.split("=");
+        if (k === key) return decodeURIComponent(v ?? "");
+      }
+      return null;
+    }
+  }
   const continueWithOauth = useCallback(async () => {
     try {
-      // Start the authentication process by calling `startSSOFlow()`
-      const { createdSessionId, setActive, signIn, signUp } = await startSSOFlow({
-        strategy: 'oauth_google',
-        // For web, defaults to current path
-        // For native, you must pass a scheme, like AuthSession.makeRedirectUri({ scheme, path })
-        // For more info, see https://docs.expo.dev/versions/latest/sdk/auth-session/#authsessionmakeredirecturioptions
-        redirectUrl: AuthSession.makeRedirectUri(),
-      })
-      console.log("created", createdSessionId)
+      // useProxy true works well in Expo dev; tweak for prod with custom scheme
+      const redirectUrl = AuthSession.makeRedirectUri({ useProxy: true });
+      console.log("Using redirectUrl:", redirectUrl);
 
-      // If sign in was successful, set the active session
-      if (createdSessionId) {
-        setActive!({
-          session: createdSessionId,
-          // Check for session tasks and navigate to custom UI to help users resolve them
-          // See https://clerk.com/docs/guides/development/custom-flows/overview#session-tasks
-          navigate: async ({ session }) => {
-           
-              router.push('/(root)/(tabs)/home')
-             
-          },
-        })
-      } else {
-        // If there is no `createdSessionId`,
-        // there are missing requirements, such as MFA
-        // See https://clerk.com/docs/guides/development/custom-flows/authentication/oauth-connections#handle-missing-requirements
+      const result = await startSSOFlow({
+        strategy: "oauth_google",
+        redirectUrl,
+      });
+
+      console.log("startSSOFlow raw result:", result);
+
+      // 1) prefer createdSessionId if present
+      let createdSessionId = result?.createdSessionId ?? null;
+
+      // 2) fallback: parse authSessionResult.url for created_session_id
+      if (!createdSessionId && result?.authSessionResult?.url) {
+        createdSessionId = extractQueryParam(result.authSessionResult.url, "created_session_id");
+        if (createdSessionId) {
+          console.log("Found created_session_id in authSessionResult.url:", createdSessionId);
+        }
       }
-    } catch (err) {
-      // See https://clerk.com/docs/guides/development/custom-flows/error-handling
-      // for more info on error handling
-      console.error(JSON.stringify(err, null, 2))
-    }
-  }, [])
-  
-    return(
-        <View className={`flex flex-col gap-4 ${className}`}>
-        <View className="flex flex-row gap-2 items-center justify-center">
-          <View className="h-[1px] flex-1 bg-gray-300 "></View>
-          <Text>or</Text>
-          <View className="h-[1px] flex-1 bg-gray-300"></View>
-        </View>
-        <CustomButton
-          title="Continue with Google"
-          onPress={continueWithOauth}
-          textVariant="primary"
-          bgVariant="outline"
-          className="py-4"
-          IconLeft={() => (
-            <Image
-              source={icons.google}
-              resizeMode="contain"
-              className="w-5 h-5 mx-2"
-            />
-          )}
-        />
-        </View>
 
-    )
-}
-export default Oauth
+      // 3) if still not found, check for deep-link fallback URL via Linking.getInitialURL() (edge cases)
+      if (!createdSessionId) {
+        try {
+          const initial = await Linking.getInitialURL();
+          if (initial) {
+            const maybe = extractQueryParam(initial, "created_session_id");
+            if (maybe) {
+              createdSessionId = maybe;
+              console.log("Found created_session_id via Linking.getInitialURL():", createdSessionId);
+            }
+          }
+        } catch (e) {
+          // ignore
+        }
+      }
+
+      // 4) set active session if we have an id
+      if (createdSessionId && result?.setActive) {
+        await result.setActive({
+          session: createdSessionId,
+          navigate: async () => {
+            router.push("/(root)/(tabs)/home");
+          },
+        });
+        return;
+      }
+
+      // If no id, surface helpful debugging info
+      console.warn("No createdSessionId returned. Full startSSOFlow result:", result);
+      Alert.alert(
+        "Sign-in incomplete",
+        "Sign-in did not produce a session automatically. Check logs for `startSSOFlow` result. If you see a `signIn` or `signUp` object, follow Clerk docs to continue the flow.",
+        [{ text: "OK" }]
+      );
+    } catch (err) {
+      console.error("SSO error:", err);
+      Alert.alert("Authentication error", "Unable to complete sign-in. Try again.");
+    }
+  }, [startSSOFlow, router]);
+
+  return (
+    <View className={`flex flex-col gap-4 ${className}`}>
+      <View className="flex flex-row gap-2 items-center justify-center">
+        <View className="h-[1px] flex-1 bg-gray-300 "></View>
+        <Text>or</Text>
+        <View className="h-[1px] flex-1 bg-gray-300"></View>
+      </View>
+      <CustomButton
+        title="Continue with Google"
+        onPress={continueWithOauth}
+        textVariant="primary"
+        bgVariant="outline"
+        className="py-4"
+        IconLeft={() => (
+          <Image
+            source={icons.google}
+            resizeMode="contain"
+            className="w-5 h-5 mx-2"
+          />
+        )}
+      />
+    </View>
+  );
+};
+export default Oauth;

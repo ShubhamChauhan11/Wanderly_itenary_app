@@ -1,11 +1,13 @@
 import CustomButton from "@/components/common/customButton";
 import CustomInput from "@/components/common/customInput";
+import Oauth from "@/components/oAuth";
 import { icons } from "@/constants";
 import { fetchAPI } from "@/lib/fetch";
 import { useSignUp } from "@clerk/clerk-expo";
 import { Link, router } from "expo-router";
 import { useState } from "react";
 import {
+  Alert,
   Image,
   Keyboard,
   KeyboardAvoidingView,
@@ -22,7 +24,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignUp = () => {
   const [formValues, setFormValues] = useState({
-    fullName: "",
+    firstName: "",
+    lastName:"",
     email: "",
     password: "",
     confirmPassword: "",
@@ -46,7 +49,9 @@ const SignUp = () => {
       await signUp.create({
         emailAddress: formValues.email,
         password: formValues.password,
-        username: formValues.fullName,
+        firstName: formValues.firstName,
+        lastName: formValues.lastName
+        
       });
 
       // Send user an email with verification code
@@ -61,7 +66,9 @@ const SignUp = () => {
     } catch (err) {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
-      console.error(JSON.stringify(err, null, 2));
+        Alert.alert(err?.errors[0]?.longMessage);
+    //  console.error(JSON.stringify(err, null, 2));
+      
     }
   };
 
@@ -83,7 +90,8 @@ const SignUp = () => {
          await fetchAPI("/(api)/user", {
           method:"POST",
           body: JSON.stringify({
-            name:formValues.fullName,
+            firstName:formValues.firstName,
+            lastName: formValues.lastName,
             email: formValues.email,
             clerkId: signUpAttempt.createdUserId
           })
@@ -107,6 +115,7 @@ const SignUp = () => {
         state: "failed",
         error: err.errors[0].longMessage,
       });
+      Alert.alert(err?.errors[0]?.message);
     }
   };
  
@@ -123,20 +132,29 @@ const SignUp = () => {
           contentContainerStyle={{ flexGrow: 1 }}
           keyboardShouldPersistTaps="handled"
         >
-          <SafeAreaView className="flex-1  px-4 flex flex-col gap-8 py-8">
+          <SafeAreaView className="flex-1  px-4 flex flex-col gap-4 py-8">
             <Text className="font-bold text-xl">Create Your Account</Text>
             <View className="w-full  flex flex-col gap-4 ">
               <CustomInput
-                label="Full Name"
-                value={formValues.fullName}
+                label="First Name"
+                value={formValues.firstName}
                 LeftIcon={icons.email}
                 secureTextEntry={false}
-                placeholder="Enter your full name"
+                placeholder="Enter your first name "
                 onChangeText={(val: string) =>
-                  setFormValues((prev) => ({ ...prev, fullName: val }))
+                  setFormValues((prev) => ({ ...prev, firstName: val }))
                 }
               />
-
+              <CustomInput
+                label="Last Name"
+                value={formValues.lastName}
+                LeftIcon={icons.email}
+                secureTextEntry={false}
+                placeholder="Enter your last name"
+                onChangeText={(val: string) =>
+                  setFormValues((prev) => ({ ...prev, lastName: val }))
+                }
+              />
               <CustomInput
                 label="Email"
                 value={formValues.email}
@@ -173,7 +191,7 @@ const SignUp = () => {
                 className="py-4 rounded-xl my-6"
               />
             </View>
-            {/* <Oauth /> */}
+            <Oauth />
             <View className="justify-center items-center">
               <Text className="text-gray-500">
                 Already have an account?
