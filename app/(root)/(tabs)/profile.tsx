@@ -39,9 +39,9 @@ const Profile = () => {
       </View>
       <View className="flex flex-col p-4 items-center justify-between ">
         <View className="flex flex-col items-center">
-          <View className="w-24 h-24 rounded-full bg-black justify-center items-center mb-2">
-            <Image source={icons.profile} className={`w-18 h-18 text-black `} />
-          </View>
+          {/* <View className="w-24 h-24 rounded-full bg-black justify-center items-center mb-2"> */}
+            <Image source={icons.profile} className={`w-24 h-24 text-black `} />
+          {/* </View> */}
           <Text className="text-lg font-bold">{user?.username || user?.fullName}</Text>
           <Text className="text-md font-bold text-gray-500">
             {user?.primaryEmailAddress.emailAddress}

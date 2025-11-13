@@ -138,7 +138,7 @@ const SignUp = () => {
               <CustomInput
                 label="First Name"
                 value={formValues.firstName}
-                LeftIcon={icons.email}
+                LeftIcon={icons.user}
                 secureTextEntry={false}
                 placeholder="Enter your first name "
                 onChangeText={(val: string) =>
@@ -148,7 +148,7 @@ const SignUp = () => {
               <CustomInput
                 label="Last Name"
                 value={formValues.lastName}
-                LeftIcon={icons.email}
+                LeftIcon={icons.user}
                 secureTextEntry={false}
                 placeholder="Enter your last name"
                 onChangeText={(val: string) =>

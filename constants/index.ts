@@ -8,6 +8,7 @@ import lock from "@/assets/icons/lock.png";
 import plane from "@/assets/icons/plane.png";
 import point from "@/assets/icons/point.png";
 import profile from "@/assets/icons/profile.png";
+import user from "@/assets/icons/user.png";
 
 export const icons = {
   google,
@@ -20,4 +21,5 @@ export const icons = {
   plane,
   point,
   cutlery,
+  user,
 };
